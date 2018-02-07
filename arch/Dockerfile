@@ -1,17 +1,8 @@
 FROM greyltc/archlinux-aur
 
-RUN pacman -S --noconfirm \
-	git \
-	pacutils \
-	perl-libwww \
-	perl-term-ui \
-	perl-json \
-	perl-data-dump \
-	perl-lwp-protocol-https \
-	perl-term-readline-gnu
+RUN pacman -Syyu --noconfirm --noprogressbar
 
-
-RUN pacman -S --noconfirm \
+RUN pacman -S --noconfirm --noprogressbar \
 	git python python-pip colordiff go rustup htop glances viewnior redis wget p7zip vim \
 	zsh zsh-syntax-highlighting zsh-completions \
 	python-tensorflow-opt-cuda \
