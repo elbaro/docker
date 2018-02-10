@@ -3,7 +3,7 @@ FROM greyltc/archlinux-aur
 RUN pacman -Syyu --noconfirm --noprogressbar
 
 RUN pacman -S --noconfirm --noprogressbar \
-	git python python-pip colordiff go rustup htop glances viewnior redis wget p7zip vim \
+	git python python-pip colordiff go rustup htop glances viewnior redis wget p7zip vim ack \
 	zsh zsh-syntax-highlighting zsh-completions \
 	python-tensorflow-opt-cuda \
 	python-pytorch-cuda \

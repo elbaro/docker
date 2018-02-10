@@ -6,7 +6,10 @@ RUN add-apt-repository ppa:gophers/archive
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
 	git curl wget cmake colordiff htop glances viewnior redis-server p7zip vim \
-	zsh zsh-syntax-highlighting libsox-dev
+	zsh zsh-syntax-highlighting libsox-dev ack-grep
+
+# zsh
+RUN chmod -R 755 /usr/local/share/zsh/site-functions
 
 # slimzsh
 RUN git clone --recursive https://github.com/changs/slimzsh.git ~/.slimzsh
@@ -24,7 +27,7 @@ RUN conda update -y conda
 
 
 RUN pip install \
-	cffi tensorboardX matplotlib tqdm h5py backtrace colorama imgaug xgboost librosa pandas pyyaml numpy scipy
+	cffi tensorboardX matplotlib tqdm h5py backtrace colorama imgaug xgboost librosa pandas pyyaml numpy scipy opencv-python
 
 # pillow, sox
 RUN pip install pillow sox
