@@ -7,7 +7,7 @@ RUN add-apt-repository ppa:gophers/archive
 
 # mongodb 1/2
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5 && \
-	echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+	echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" > /etc/apt/sources.list.d/mongodb-org-3.6.list
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
@@ -32,7 +32,7 @@ ENV PATH=/miniconda/bin:${PATH}
 RUN conda update -y conda
 
 # mongodb 2/2
-RUN sudo apt-get install -y mongodb-org
+RUN apt-get install -y mongodb-org
 
 RUN pip install \
 	cffi tensorboardX matplotlib tqdm h5py backtrace colorama imgaug xgboost librosa pandas pyyaml numpy scipy opencv-python
