@@ -2,12 +2,15 @@ FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 
 RUN apt-get update
 
-RUN apt-get install -y --no-install-recommends software-properties-common apt-transport-https
+RUN apt-get install -y --no-install-recommends \
+	software-properties-common apt-transport-https apt-utils \
+	build-essential ca-certificates libpng-dev libjpeg-dev libsm-dev
+
+# 3rd party
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+RUN echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" > /etc/apt/sources.list.d/mongodb-org-3.6.list
 RUN add-apt-repository ppa:gophers/archive
 
-# mongodb 1/2
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5 && \
-	echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" > /etc/apt/sources.list.d/mongodb-org-3.6.list
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
@@ -31,12 +34,15 @@ RUN rm Miniconda3-latest-Linux-x86_64.sh
 ENV PATH=/miniconda/bin:${PATH}
 RUN conda update -y conda
 
-# mongodb 2/2
-RUN apt-get install -y mongodb-org
-
 RUN pip install \
-	cffi tensorboardX matplotlib tqdm h5py backtrace colorama imgaug xgboost librosa pandas pyyaml numpy scipy opencv-python
+	cffi tensorboardX matplotlib tqdm h5py backtrace colorama imgaug xgboost librosa pandas pyyaml numpy scipy redis
 
+
+
+# opencv
+RUN apt-get install -y libopencv-dev && pip install opencv-python
+# mogo db (note: no systemd -> no 'service mongodb start'. need to manually start with `mongod --dbpath .`)
+RUN apt-get install -y mongodb-org
 # pillow, sox
 RUN pip install pillow sox
 # tensorflow
@@ -74,4 +80,6 @@ RUN locale-gen en_US.UTF-8
 ENV TZ=Asia/Seoul
 
 ENTRYPOINT ["/bin/sleep", "infinity"]
+
+
 
