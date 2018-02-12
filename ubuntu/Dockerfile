@@ -52,8 +52,8 @@ WORKDIR /tmp
 RUN git clone https://github.com/davisking/dlib.git && cd dlib && python setup.py install
 # pytorch
 WORKDIR /tmp
-RUN conda install -c soumith magma-cuda91
-RUN git clone --recursive https://github.com/pytorch/pytorch.git && cd pytorch && python setup.py install
+RUN conda install -c soumith magma-cuda90
+RUN pip install http://download.pytorch.org/whl/cu90/torch-0.3.0.post4-cp36-cp36m-linux_x86_64.whl
 # torchaudio
 WORKDIR /tmp
 RUN git clone https://github.com/pytorch/audio.git && cd audio && python setup.py install
