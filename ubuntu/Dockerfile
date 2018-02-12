@@ -35,14 +35,17 @@ ENV PATH=/miniconda/bin:${PATH}
 RUN conda update -y conda
 
 RUN pip install \
-	cffi tensorboardX matplotlib tqdm h5py backtrace colorama imgaug xgboost librosa pandas pyyaml numpy scipy redis
+	cffi tensorboardX matplotlib tqdm h5py backtrace colorama imgaug xgboost librosa pandas pyyaml numpy scipy redis pymongo
 
 
 
 # opencv
 RUN apt-get install -y libopencv-dev && pip install opencv-python
-# mogo db (note: no systemd -> no 'service mongodb start'. need to manually start with `mongod --dbpath .`)
+# mongo db (note: no systemd -> no 'service mongodb start'. need to manually start with `mongod --dbpath .`)
+# mongo-c-driver: libssl-dev, libsasl2-dev
 RUN apt-get install -y mongodb-org
+
+
 # pillow, sox
 RUN pip install pillow sox
 # tensorflow
