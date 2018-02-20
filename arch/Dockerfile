@@ -5,7 +5,7 @@ RUN pacman -Syyu --noconfirm --noprogressbar
 RUN pacman -S --noconfirm --noprogressbar \
 	git python python-pip colordiff go rustup htop glances viewnior wget p7zip vim ack \
 	mongodb python-pymongo redis python-redis \
-	zsh zsh-syntax-highlighting zsh-completions \
+	zsh zsh-completions \
 	python-tensorflow-opt-cuda \
 	python-pytorch-cuda \
 	sox
