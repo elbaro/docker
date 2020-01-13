@@ -1,6 +1,7 @@
-FROM archlinux:latest
+FROM archlinux
 
-RUN pacman-mirrors --geoip
+RUN pacman -Sy --noconfirm --noprogressbar reflector
+RUN reflector --verbose --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 RUN pacman -Syyu --noconfirm --noprogressbar \
 	git clang python python-pip flake8 go rustup wget p7zip
 RUN rustup install nightly && rustup default nightly
