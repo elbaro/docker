@@ -3,7 +3,7 @@ FROM archlinux
 RUN pacman -Sy --noconfirm --noprogressbar reflector
 RUN reflector --verbose --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 RUN pacman -Syyu --noconfirm --noprogressbar \
-	git clang python python-pip flake8 rustup wget fd hyperfine ripgrep
+	git clang python python-pip flake8 rustup wget fd hyperfine ripgrep openssh
 RUN rustup install nightly && rustup default nightly
 ENV PATH=~/.cargo/bin:$PATH
 RUN pip install cpplint flake8
