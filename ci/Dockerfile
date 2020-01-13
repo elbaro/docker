@@ -1,5 +1,6 @@
 FROM archlinux:latest
 
+RUN pacman-mirrors --geoip
 RUN pacman -Syyu --noconfirm --noprogressbar \
 	git clang python python-pip flake8 go rustup wget p7zip
 RUN rustup install nightly && rustup default nightly
